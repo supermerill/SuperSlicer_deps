@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Upload Release Asset
+    name: Make and upload windows SuperSlicer deps
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -14,11 +14,14 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: mkdir in deps
         run: mkdir deps/build
-      - name: cmake and make deps
+      - name: cmake deps
         working-directory: ./deps/build
-        run: |
-          cmake .. -G "Visual Studio 16 2019" -A x64
-          msbuild /m ALL_BUILD.vcxproj
+        shell: cmd
+        run: cmake .. -G "Visual Studio 16 2019" -A x64
+      - name: make deps
+        working-directory: ./deps/build
+        shell: cmd
+        run: msbuild /m ALL_BUILD.vcxproj
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
         with:
