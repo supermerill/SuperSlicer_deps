@@ -3,7 +3,7 @@ name: C/C++ deps for windows x64
 on:
   release:
     types: [published]
-	
+
 jobs:
   build:
     name: Upload Release Asset
