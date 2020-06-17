@@ -1,0 +1,48 @@
+name: C/C++ deps for ubuntu
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: update apt
+      run: sudo apt update
+    - name: install gtk2 glew
+      run: sudo apt install libgtk2.0-dev libglew-dev libudev-dev
+    - name: mkdir in deps
+      run: mkdir deps/build
+    - name: cmake deps
+      working-directory: ./deps/build
+      run: cmake ..
+    - name: make deps
+      working-directory: ./deps/build
+      run: make
+    - name: zip the result
+      working-directory: ./deps/build
+      run: zip -r deps_linux.zip destdir
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./deps/build/deps_linux.zip
+        asset_name: deps_linux.zip
+        asset_content_type: application/zip
