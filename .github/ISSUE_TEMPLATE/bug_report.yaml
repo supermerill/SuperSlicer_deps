@@ -1,9 +1,5 @@
 name: Bug Report
 description: File a bug report
-title: "[Bug]: "
-labels: ["bug", "triage"]
-assignees:
-  - octocat
 body:
   - type: markdown
     attributes:
@@ -45,7 +41,7 @@ body:
   - type: input
     id: os
     attributes:
-      label: What os do you use?
+      label: Operating system
       description: with the version if possible
       placeholder: windows 10 / ubuntu 22.04 / macos 15
     validations:
@@ -53,7 +49,7 @@ body:
   - type: input
     id: printer
     attributes:
-      label: What is your printer model?
+      label: Printer model
       description: May be useful to update default profile, or understand why to creates a problem
       placeholder: voron 2.4 with afterburner
     validations:
