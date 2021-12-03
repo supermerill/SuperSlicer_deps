@@ -25,7 +25,7 @@ body:
       description: "*Please* upload a ZIP archive containing the project file used when the problem arise. Please export it just before the problem occur. Even if you did nothing and/or there is no object, export it! (it contains your current configuration)."
       placeholder: |
         `File`->`Export project as...` then zip it & drop it here
-        **Also, if needed include the steps to reproduce the bug**:
+        Also, if needed include the steps to reproduce the bug:
         1. Go to '...'
         2. Click on '....'
         3. Scroll down to '....'
