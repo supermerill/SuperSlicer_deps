@@ -1,0 +1,25 @@
+name: C/C++ deps for macos
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: get zstd
+      run: |
+        echo "\nbrew --prefix libiconv:\n"
+        brew --prefix libiconv
+        echo "\nbrew --prefix zstd:\n"
+        brew --prefix zstd
+        export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix zstd)/lib/
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: zstd
+        path: $(brew --prefix zstd)/
