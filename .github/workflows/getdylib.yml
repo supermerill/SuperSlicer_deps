@@ -1,4 +1,4 @@
-name: C/C++ deps for macos
+name: get_zstd
 
 on: workflow_dispatch
 
